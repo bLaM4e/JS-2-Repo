@@ -1,0 +1,32 @@
+body {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+
+header {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-right: 53px;
+    text-align: right;
+
+}
+
+.btn-cart {
+    width: 80px;
+    height: 40px;
+}
+
+.products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    border: 1px solid black;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    text-align: right;
+}
