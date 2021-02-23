@@ -1,21 +1,16 @@
 class Catalog {
     data = [];
-    // products = [];
+    products = [];
     container = null;
-    sum = 0;
 
     constructor(selector) {
         this.container = document.querySelector(selector);
         this._fetchData();
         this._render();
-        this.sumAll();
     }
 
-    sumAll() {
-        for (let element of this.data) {
-            this.sum += element.price
-        }
-        console.log(`Суммарная стоимость всех товаров равна ${this.sum} рублей`)
+    calculationSum() {
+        return this.products.reduce((accum, item) => accum += item.price, 0);
     }
 
     _fetchData() {
@@ -30,8 +25,7 @@ class Catalog {
     _render () {
         for (let element of this.data) {
             const product = new ProductCatalog(element);
-            // this.products.push(product);
-            // console.log(this.products);
+            this.products.push(product);
             this.container.insertAdjacentHTML('beforeend', product.render());
         }
     }
@@ -102,3 +96,4 @@ class Payment {
 }
 
 const catalog = new Catalog('.products');
+console.log(catalog.calculationSum());
