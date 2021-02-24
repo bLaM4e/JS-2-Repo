@@ -237,10 +237,65 @@ class Cart extends List {
     }
 }
 
+class ChangeText {
+    constructor() {
+        this.text = document.querySelector(".text").textContent;
+        this.newText = this.text.replace(/\B'|'\B/gi, '"');
+        this._event();
+    }
+
+    _event() {
+        document.querySelector(".btn-change").addEventListener('click', () => {
+            this._change();
+        });
+
+    }
+
+    _change() {
+        document.querySelector(".text").textContent = this.newText;
+    }
+}
+
+class Form {
+    constructor() {
+        this.regName = /[a-zа-я]+/i;
+        this.regPhone = /\+7\(\d{3}\)\d{3}-\d{4}/
+        this.regEmail = /[a-z]{2}[\.-]?[a-z]{4}@mail\.ru/gi;
+        this.stop = 0;
+        this.goForm();
+    }
+
+    goForm() {
+        document.querySelector(".btn-go").addEventListener('click', e => {
+            this.check();
+            if (this.stop === 1) {
+                e.preventDefault();
+            }
+        });
+    }
+
+    check() {
+        if (!this.regName.test(document.getElementById('name').value)) {
+            document.getElementById('name').value = '';
+            document.querySelector(".name").style.backgroundColor = "red";
+            this.stop = 1;
+        }
+        if (!this.regPhone.test(document.getElementById('phone').value)) {
+            document.getElementById('phone').value = '';
+            document.querySelector(".phone").style.backgroundColor = "red";
+            this.stop = 1;
+        }
+        if (!this.regEmail.test(document.getElementById('mail').value)) {
+            document.getElementById('mail').value = '';
+            document.querySelector(".mail").style.backgroundColor = "red";
+            this.stop = 1;
+        }
+    }
+}
+
 const cart = new Cart();
 const list = new Products(cart);
 list.getJson(`getProducts.json`).then(data => list.handleData(data));
 
-
-
-
+const changeText = new ChangeText();
+const form = new Form();
